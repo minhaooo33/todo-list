@@ -1,0 +1,43 @@
+.add-task-item{
+    width: 620px;
+    height: 65px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-left: 40px;
+    display: flex;
+    background-color: #FFFFFF;
+    
+}
+
+
+.add-btn{
+    flex:1;
+    padding-left: 32px;
+    background-color:transparent;
+    text-align: left;
+    border: 2px solid #C8C8C8;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-btn:hover{
+    background-color: #F0F0F0;
+}
+
+fa-icon{
+    font-size: 24px;
+    color: #C8C8C8;
+ 
+}
+
+.add-text {
+    font-family: Roboto-Regular;
+    font-size: 24px;
+    color: #C8C8C8;
+    text-align: left;
+}
+
+.app-task-card{
+    margin-bottom: -24px;
+    margin-left: -36px;
+}

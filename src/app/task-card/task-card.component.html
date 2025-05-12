@@ -1,0 +1,84 @@
+<ul class="task-list">
+
+  <li class="task-item">
+    <div class="task-top">
+      <div class="main">
+        <div clas="task-title">
+          <input type="checkbox" class="checkbox">
+          <!-- 任務標題欄位；完成時加上刪除線 -->
+          <input type="text" class="title" value="範例標題" >
+        </div>
+
+        <div>
+          <!-- 標星圖示；點擊可切換重要標記 -->
+        <fa-icon [icon]="faRegularStar" class="star"></fa-icon>
+          <!-- 編輯圖示；點擊可展開編輯面板 -->
+        <fa-icon [icon]="faPen" class="pen"></fa-icon>
+        </div>
+      </div>
+      <div class="task-info">
+
+        <fa-icon [icon]="faCalendarDays"></fa-icon>
+        <span class="date">2025/05/12</span>
+
+        <fa-icon [icon]="faFile"></fa-icon>
+
+        <fa-icon [icon]="faCommentDots"></fa-icon>
+
+      </div>
+    </div>
+
+    <!-- 詳細資訊面板（展開編輯時顯示） -->
+    <div class="task-bottom">
+      <div class="controls">
+        <!-- 到期日設定區 -->
+        <h3>
+          <fa-icon [icon]="faCalendarDays"></fa-icon>
+          <span>Deadline</span>
+        </h3>
+        <!-- 原生日期選擇器 -->
+        <div class="picker">
+            <input type="date" class="date-picker" value="2025-05-12">
+            <input type="time" class="time-picker" value="12:00">
+        </div>
+        <!-- 檔案上傳或顯示區 -->
+        <h3>
+          <fa-icon [icon]="faFile"></fa-icon>
+          <span>File</span>
+        </h3>
+        <div class="file-upload">
+            <div class="file-info">
+                <p class="file-name">example.txt</p>
+                <p class="file-upload-time">uploaded yesterday</p>
+            </div>
+         <div class="upload-btn">
+          <input type="file" id="fileUpload" class="file-input" hidden>
+          <label for="fileUpload" class="file-button">
+            <fa-icon [icon]="faPlus"></fa-icon>
+          </label>
+         </div>
+        </div>
+
+        <h3>
+          <fa-icon [icon]="faCommentDots"></fa-icon>
+          <span>Comment</span>
+        </h3>
+        <textarea class="memo" rows="5" placeholder="Type your memo here…"></textarea>
+      </div>
+      <div class="btns">
+        <!-- 取消按鈕：關閉編輯面板 -->
+        <button 
+          class="btn-cancel"
+          (click)="onCancelClick()">
+          <fa-icon [icon]="faXmark"></fa-icon>
+          <span>  Cancel</span>
+        </button>
+        <!-- 新增任務按鈕：提交表單或新增至列表 -->
+        <button class="add-btn">
+          <fa-icon [icon]="faPlus"></fa-icon>
+          <span>  Add Task</span>
+        </button>
+      </div>
+    </div>
+  </li>
+</ul>
