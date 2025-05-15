@@ -6,6 +6,7 @@
     justify-content: center;
 }
 
+
 .task-item{
     width: 100%;
     margin-bottom: 8px;
@@ -24,10 +25,21 @@
     margin-right: 32px;
 }
 
+.star-important{
+    color: #F5A623;
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 32px;
+}
+
 .pen{
     cursor: pointer;
     font-size: 24px;
     margin-right: 0;
+}
+
+.pen-active{
+    color:#4A90E2;
 }
 
 .checkbox{
@@ -45,8 +57,14 @@
     outline: none;
 }
 
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
 .task-info{
-    margin-top: 15px;
+    margin-top: 8px;
+    margin-bottom: -8px;
 }
 
 .task-info fa-icon{
@@ -57,7 +75,7 @@
 
 .date{
     margin-left: -8px;
-      margin-right: 16px;
+      margin-right: 8px;
 }
 
 
@@ -77,6 +95,10 @@
 
 .task-top{
     padding-left: 65px;
+}
+
+.task-top.important{
+    background-color: #FFF2DC;
 }
 
 .task-bottom h3{
@@ -194,5 +216,12 @@
     color: #FFFFFF;
     background-color: #4A90E2;
     border: none;
+    cursor: pointer;
+}
 
+.btn-cancel:hover{
+    background-color: #F2F2F2;
+}
+.add-btn:hover{
+    background-color: #3982D7;;
 }

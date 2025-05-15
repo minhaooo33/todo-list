@@ -1,20 +1,33 @@
 <div 
   class="add-task-item"
-  *ngIf="!adding">
-    <!-- 1) 還沒按新增時，顯示 button -->
+  *ngIf="!adding"
+  >
+    <!-- 1) 還沒按新增時，顯示 button
+
     <button
       type="button"
       class="add-btn"
       (click)="handleStartAdding()">
-       <fa-icon [icon]="faPlus"></fa-icon>
-        <span class="add-text">   Add Task</span>
-    </button>
-</div>
+           
+    <span class="add-text">   Add Task</span>
+    </button>  -->
+
+  
+    <input
+      class="add-btn"
+      type="text"
+      placeholder="＋  Add Task"
+      (focus)="handleStartAdding()"/>
+    </div>
   
   <app-task-card 
     class="app-task-card"
     *ngIf="adding"
     (cancel)="handleStartAdding()"
+    (addTask)="handleAddNewTask($event)"
+    [isAdding]="true"
+    [isCompleted]="isCompleted"
+    [priority]="priority"
     >
   </app-task-card>
 

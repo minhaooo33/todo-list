@@ -6,7 +6,7 @@
     margin-left: 40px;
     display: flex;
     background-color: #FFFFFF;
-    
+   
 }
 
 
@@ -14,28 +14,28 @@
     flex:1;
     padding-left: 32px;
     background-color:transparent;
-    text-align: left;
     border: 2px solid #C8C8C8;
     border-radius: 5px;
-    cursor: pointer;
+    outline: none;
+    padding: 16px 0 8px 32px;
 }
+
+input::placeholder {
+  font-family: Roboto-Regular;
+  font-size: 24px;
+  color: #C8C8C8;
+  text-align: left;
+}
+
 
 .add-btn:hover{
     background-color: #F0F0F0;
 }
 
-fa-icon{
-    font-size: 24px;
-    color: #C8C8C8;
- 
+.add-btn:focus{
+   display: none;
 }
 
-.add-text {
-    font-family: Roboto-Regular;
-    font-size: 24px;
-    color: #C8C8C8;
-    text-align: left;
-}
 
 .app-task-card{
     margin-bottom: -24px;

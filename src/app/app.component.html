@@ -1,10 +1,17 @@
-  <app-header></app-header>
+<app-header></app-header>
 <main class="main">
+<app-task-add></app-task-add>
 
-  <app-task-add>  </app-task-add>
-  <app-task-card />
+    <app-task-card
+    *ngFor="let task of todos$ | async"
+      [id]="task.id"
+      [isCompleted]="task.completed"
+      [priority]="task.priority"
+      [title]="task.title"
+      [comment]="task.comment"
+      [deadlineDate]="task.deadlineDate"
+      [deadlineTime]="task.deadlineTime"
+    ></app-task-card>
+
 </main>
-
-
-
 <router-outlet />

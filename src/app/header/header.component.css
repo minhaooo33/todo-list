@@ -1,5 +1,6 @@
 header {
   position: fixed;
+    z-index: 1000; 
   top: 0;
   left: 0; 
   right: 0;
@@ -16,20 +17,31 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 34px;
+  margin-left: 35px;
   gap: 64px;
 }
 
-
-.btn{
+button{
   background-color:#4A90E2;
   font-size: 24px;
   color: #00408B;
   text-align: center;
   border: none;
   cursor: pointer;
+  border-bottom: 5px solid #4A90E2;
+  height: 76px;
+  width: 158px;
+}
+
+.selected{
+  background-color:#4A90E2;
+  font-size: 24px;
+  color: #FFFFFF;
+  text-align: center;
+  border: none;
+  cursor: pointer;
   border-bottom: 5px solid #00408B;
   height: 76px;
-  width: 160px;
+  width: 158px;
 }
 

@@ -1,13 +1,26 @@
 <header>
     <div class="header-content">
     <h1 class="my-tasks"> 
-        <button class="btn">My Tasks</button>
+        <button 
+        [ngClass]="{ 'selected': selectedFilter === 'myTask' }"
+        (click)="showAllTasks()">
+        My Tasks
+        </button>
     </h1>
         <h1 class="in-progress"> 
-        <button class="btn">In Progress</button>
+        <button 
+        [ngClass]="{ 'selected': selectedFilter === 'inProgress' }"
+        (click)="showInProgressTasks()">
+        In Progress
+        </button>
     </h1>
         <h1 class="completed"> 
-        <button class="btn">Completed</button>
+        <button 
+        [ngClass]="{ 'selected': selectedFilter === 'completed' }"
+        (click)="showCompletedTasks()"
+        >
+        Completed
+        </button>
     </h1>
     </div>
 </header>
