@@ -1,9 +1,12 @@
 <app-header></app-header>
 <main class="main">
 <app-task-add></app-task-add>
-
+<ul  
+cdkDropList 
+(cdkDropListDropped)="drop($event)"
+class="task-list">
     <app-task-card
-    *ngFor="let task of todos$ | async"
+      *ngFor="let task of todos$ | async; trackBy: trackById "
       [id]="task.id"
       [isCompleted]="task.completed"
       [priority]="task.priority"
@@ -11,7 +14,9 @@
       [comment]="task.comment"
       [deadlineDate]="task.deadlineDate"
       [deadlineTime]="task.deadlineTime"
+      cdkDrag
+      class="task-card"
     ></app-task-card>
-
+</ul>
 </main>
 <router-outlet />

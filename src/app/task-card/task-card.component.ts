@@ -112,6 +112,8 @@ export class TaskCardComponent implements OnInit {
 }
 
   onSaveEditClick() {
+     const currentTask = this.todoService.getTodos().find(t => t.id === this.id);
+  if (!currentTask) return; 
     this.todoService.updateTask({
       id: this.id,
       title: this.tempTitle,
@@ -119,7 +121,8 @@ export class TaskCardComponent implements OnInit {
       completed: this.tempCompleted,
       priority: this.tempPriority,
       deadlineDate: this.tempDeadlineDate,
-      deadlineTime: this.tempDeadlineTime
+      deadlineTime: this.tempDeadlineTime,
+      order: currentTask.order
     });
     this.todoService.setEditingTaskId(null);
   }

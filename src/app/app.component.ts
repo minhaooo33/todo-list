@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser'; 
+import { DragDropModule, CdkDragDrop ,moveItemInArray} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
@@ -17,7 +17,8 @@ import { TodoService, Task} from './services/todo.service';
             TaskCardComponent,
             TaskAddComponent,
             HeaderComponent, 
-            FormsModule,],
+            FormsModule,
+            DragDropModule],
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -31,7 +32,7 @@ import { TodoService, Task} from './services/todo.service';
     this.todos$ = this.todoService.todos$;
   }
 }*/
-export class AppComponent implements OnInit {
+export class AppComponent {
   todos$: Observable<Task[]>;
 
   constructor(private todoService: TodoService) {
@@ -39,7 +40,14 @@ export class AppComponent implements OnInit {
     this.todos$ = this.todoService.filteredTodos$;
   }
 
-  ngOnInit() {
-    // No need to reassign it here, it's already initialized
-  }
+drop(event: CdkDragDrop<Task[]>) {
+  if (event.previousIndex === event.currentIndex) return;
+  this.todoService.reorderTasks(event.previousIndex, event.currentIndex);
+}
+
+trackById(index: number, task: Task): string {
+  console.log('trackById called', index, task);
+  return task.id;
+}
+
 }

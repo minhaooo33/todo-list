@@ -10,6 +10,7 @@ export interface Task {
   deadlineDate?: string;
   deadlineTime?: string;
   comment?: string;
+  order: number;
 }
 
 export type Filter = 'myTask' | 'inProgress' | 'completed';
@@ -41,8 +42,14 @@ export class TodoService {
       }
 
       // priority 排序：true > false
-      return filtered.sort((a, b) => Number(b.priority) - Number(a.priority));
-    })
+      return filtered
+      .sort((a, b) => {
+      if (b.priority !== a.priority) {
+      return Number(b.priority) - Number(a.priority);
+      }
+      return a.order - b.order;
+      });
+        })
   );
 
   constructor() {
@@ -68,9 +75,11 @@ export class TodoService {
   editingTaskId$ = this.editingTaskIdSubject.asObservable();
 
   // 新增待辦
-  addTask(task: Task) {
-    this.todosSubject.next([...this.todosSubject.value, task]);
-  }
+addTask(task: Task) {
+  const current = this.todosSubject.value;
+  const maxOrder = current.length > 0 ? Math.max(...current.map(t => t.order)) : 0;
+  this.todosSubject.next([...current, { ...task, order: maxOrder + 1 }]);
+}
 
   // 更新待辦
   updateTask(updated: Task) {
@@ -114,6 +123,29 @@ export class TodoService {
   // 取得目前所有的 todos（同步）
   getTodos(): Task[] {
   return this.todosSubject.value;
+}
+
+get currentTasks(): Task[] {
+  return this.todosSubject.value;
+}
+
+updateTasks(tasks: Task[]) {
+  this.todosSubject.next(tasks);
+}
+
+// 重新排序任務
+reorderTasks(fromIndex: number, toIndex: number) {
+  const tasks = [...this.todosSubject.value];
+  const [moved] = tasks.splice(fromIndex, 1);
+  tasks.splice(toIndex, 0, moved);
+
+  // 重新設定每筆任務的 order
+  const reordered = tasks.map((task, index) => ({
+    ...task,
+    order: index
+  }));
+
+  this.todosSubject.next(reordered);
 }
 
 }

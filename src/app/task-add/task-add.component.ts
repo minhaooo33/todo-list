@@ -19,6 +19,8 @@ isCompleted: boolean = false;
 priority: boolean = false;
 constructor(private todoSvc: TodoService) {}
 
+
+
 handleStartAdding() {
   this.adding = !this.adding;
 }
@@ -34,6 +36,9 @@ handleAddNewTask(payload: {
 }
 
 )  {
+  const currentTodos = this.todoSvc.getTodos();
+  const maxOrder = currentTodos.length > 0 ? Math.max(...currentTodos.map(t => t.order)) : 0;
+
     const newTask: Task = {
       id: Math.random().toString(36).substring(2, 15),
       title: payload.title,
@@ -42,6 +47,7 @@ handleAddNewTask(payload: {
       deadlineDate:  payload.deadlineDate,
       deadlineTime: payload.deadlineTime,
       comment: payload.comment,
+      order: maxOrder + 1,
     };
     this.todoSvc.addTask(newTask);
     this.adding = false;
