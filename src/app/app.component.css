@@ -18,8 +18,26 @@
 
 .cdk-drag-placeholder {
   opacity: 0;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
 }
 
 .task-card {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  cursor: move;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+.task-left{
+  margin-top: -4px;
+  margin-left: 32px;
+font-family: Roboto-Italic;
+font-size: 24px;
+color: #C8C8C8;
 }

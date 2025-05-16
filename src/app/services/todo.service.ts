@@ -11,6 +11,8 @@ export interface Task {
   deadlineTime?: string;
   comment?: string;
   order: number;
+  fileName?: string;
+  fileUploadTime?: string;
 }
 
 export type Filter = 'myTask' | 'inProgress' | 'completed';
@@ -84,12 +86,6 @@ addTask(task: Task) {
   // 更新待辦
   updateTask(updated: Task) {
     const list = this.todosSubject.value.map(t => t.id === updated.id ? updated : t);
-    this.todosSubject.next(list);
-  }
-
-  // 刪除待辦
-  removeTodo(id: string) {
-    const list = this.todosSubject.value.filter(t => t.id !== id);
     this.todosSubject.next(list);
   }
 

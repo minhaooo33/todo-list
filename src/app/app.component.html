@@ -14,9 +14,19 @@ class="task-list">
       [comment]="task.comment"
       [deadlineDate]="task.deadlineDate"
       [deadlineTime]="task.deadlineTime"
+      [fileName]="task.fileName"
+      [fileUploadTime]="task.fileUploadTime"
       cdkDrag
       class="task-card"
     ></app-task-card>
 </ul>
+<p class="task-left">
+  <ng-container *ngIf="inProgressCount > 0; else completed">
+    {{ inProgressCount }} task left
+  </ng-container>
+  <ng-template #completed>
+    {{ completedCount }} task completed
+  </ng-template>
+</p>
 </main>
 <router-outlet />

@@ -46,6 +46,8 @@ export class TaskCardComponent implements OnInit {
   @Input() isAdding: boolean = false;
   @Input() isCompleted: boolean = false;
   @Input() priority: boolean = false;
+  @Input() fileName?: string;
+  @Input() fileUploadTime?: string;
 
   tempTitle: string = '';
   tempComment: string = '';
@@ -53,7 +55,9 @@ export class TaskCardComponent implements OnInit {
   tempDeadlineTime: string = '';
   tempCompleted: boolean = false;
   tempPriority: boolean = false;
+  isMemoEditable: boolean = false;
 
+  @Output() fileSelected = new EventEmitter<Event>();
   @Output() cancel = new EventEmitter<void>();
   @Output() addTask = new EventEmitter<{
                           title: string;
@@ -62,12 +66,42 @@ export class TaskCardComponent implements OnInit {
                           comment: string;
                           deadlineDate: string;
                           deadlineTime: string;
-                          
+                          fileName?: string;
+                          fileUploadTime?: string;
                         }>();
+  
 
   onCancelClick() {
     this.cancel.emit();
   }
+
+onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length) return;
+
+  const file = input.files[0];
+  const uploadTime = new Date().toLocaleString();
+
+  if (this.isAdding) {
+    // 如果是新增任務階段，傳給父元件
+    this.fileSelected.emit(event);
+  } else {
+    // 如果是編輯中，直接更新這筆 task
+    const currentTask = this.todoService.getTodos().find(t => t.id === this.id);
+    if (!currentTask) return;
+
+    // 先更新 component 的變數（顯示用）
+    this.fileName = file.name;
+    this.fileUploadTime = uploadTime;
+
+    // 寫入 service
+    this.todoService.updateTask({
+      ...currentTask,
+      fileName: file.name,
+      fileUploadTime: uploadTime,
+    });
+  }
+}
 
   onAddClick() {
     this.addTask.emit({
@@ -76,7 +110,9 @@ export class TaskCardComponent implements OnInit {
       comment: this.tempComment,
       deadlineDate: this.tempDeadlineDate,
       deadlineTime: this.tempDeadlineTime,
-      priority: this.tempPriority
+      priority: this.tempPriority,
+      fileName: this.fileName,
+      fileUploadTime: this.fileUploadTime,
     });
   }
 
@@ -89,6 +125,8 @@ export class TaskCardComponent implements OnInit {
       this.tempDeadlineTime = this.deadlineTime ?? '';
       this.tempCompleted = this.isCompleted;
       this.tempPriority = this.priority ?? false;
+      this.fileName = this.fileName ?? '';
+      this.fileUploadTime = this.fileUploadTime ?? '';
     } else {
       this.todoService.editingTaskId$.subscribe(editingId => {
         this.isEditing = editingId === this.id;
@@ -98,6 +136,8 @@ export class TaskCardComponent implements OnInit {
         this.tempDeadlineTime = this.deadlineTime ?? '';
         this.tempCompleted = this.isCompleted;
         this.tempPriority = this.priority ?? false;
+        this.fileName = this.fileName ?? '';
+        this.fileUploadTime = this.fileUploadTime ?? '';
       });
     }
   }
@@ -122,7 +162,9 @@ export class TaskCardComponent implements OnInit {
       priority: this.tempPriority,
       deadlineDate: this.tempDeadlineDate,
       deadlineTime: this.tempDeadlineTime,
-      order: currentTask.order
+      order: currentTask.order,
+      fileName: this.fileName,
+      fileUploadTime: this.fileUploadTime,
     });
     this.todoService.setEditingTaskId(null);
   }

@@ -1,9 +1,9 @@
 .add-task-item{
     width: 620px;
     height: 65px;
-    margin-top: 24px;
+    margin-top: 32px;
     margin-bottom: 24px;
-    margin-left: 40px;
+    margin-left: 0px;
     display: flex;
     background-color: #FFFFFF;
    

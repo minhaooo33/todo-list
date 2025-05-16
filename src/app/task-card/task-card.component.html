@@ -3,34 +3,39 @@
   <div class="task-item">
     <div class="task-top" [ngClass]="{ 'important': tempPriority }">
       <div class="main">
-        <div clas="task-title">
-          <input 
+        <div class="task-title">
+          <div class="task-left">
+            <div class="drag-handle" cdkDragHandle>
+             ⋮
+            </div>
+            <input 
             type="checkbox" 
             class="checkbox"
             [checked]="!isAdding && isCompleted"
             [(ngModel)]="tempCompleted"
             (change)="!isAdding && onCompleteClick()"
-          />
-
+            />
+          </div>
           <!-- 任務標題欄位；完成時加上刪除線 -->
           <input type="text" class="title" [class.completed]="tempCompleted" [(ngModel)]="tempTitle">
         </div>
 
-        <div>
+        <div class="task-right">
           <!-- 標星圖示；點擊可切換重要標記 -->
-        <fa-icon 
+          <fa-icon 
           [icon]="tempPriority ? faSolidStar : faRegularStar" 
           [ngClass]="tempPriority ? 'star-important' : 'star'" 
           (click)="onProiorityClick()">
-        </fa-icon>
+          </fa-icon>
           <!-- 編輯圖示；點擊可展開編輯面板 -->
-        <fa-icon 
+          <fa-icon 
           [icon]="faPen"
           [ngClass]="{ 'pen': true, 'pen-active': isEditing && !isAdding }"
           (click)="!isAdding && onEditClick()">
-        </fa-icon>
+          </fa-icon>
         </div>
       </div>
+
       <div class="task-info">
 
         <ng-container *ngIf="deadlineDate">
@@ -38,7 +43,7 @@
           <span class="date">{{ deadlineDate }}</span>
         </ng-container>
 
-        <ng-container *ngIf="deadlineDate"> <!-- 之後根據實際檔案名稱變數調整 -->
+        <ng-container *ngIf="fileName"> <!-- 之後根據實際檔案名稱變數調整 -->
           <fa-icon [icon]="faFile"></fa-icon>
         </ng-container>
 
@@ -71,12 +76,17 @@
           <span>File</span>
         </h3>
         <div class="file-upload">
-            <div class="file-info">
-                <p class="file-name">example.txt</p>
-                <p class="file-upload-time">uploaded yesterday</p>
+            <div class="file-info" *ngIf="fileName">
+              <p class="file-name">{{ fileName }}</p>
+              <p class="file-upload-time">{{ fileUploadTime }}</p>
             </div>
          <div class="upload-btn">
-          <input type="file" id="fileUpload" class="file-input" hidden>
+          <input 
+              type="file" 
+              id="fileUpload" 
+              class="file-input" 
+              hidden 
+              (change)="onFileSelected($event)">
           <label for="fileUpload" class="file-button">
             <fa-icon [icon]="faPlus"></fa-icon>
           </label>
@@ -87,7 +97,14 @@
           <fa-icon [icon]="faCommentDots"></fa-icon>
           <span>Comment</span>
         </h3>
-        <textarea class="memo" rows="5" placeholder="Type your memo here…" [(ngModel)]="tempComment"></textarea>
+        <textarea 
+          class="memo" 
+          rows="5" 
+          placeholder="Type your memo here…" 
+          [(ngModel)]="tempComment"
+          [readonly]="!isMemoEditable"
+          (dblclick)="isMemoEditable = true">
+        </textarea>
       </div>
 
       <div class="btns">

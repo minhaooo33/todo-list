@@ -23,21 +23,17 @@ import { TodoService, Task} from './services/todo.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-/*export class AppComponent implements OnInit {
- todos$!: Observable<Task[]>;
-  
-  constructor(private todoService: TodoService) {}
-  
-  ngOnInit() {
-    this.todos$ = this.todoService.todos$;
-  }
-}*/
 export class AppComponent {
   todos$: Observable<Task[]>;
+  inProgressCount: number = 0;
+  completedCount: number = 0;
 
   constructor(private todoService: TodoService) {
-    // Make sure to initialize the todos$ variable here
     this.todos$ = this.todoService.filteredTodos$;
+    this.todos$.subscribe(tasks => {
+      this.inProgressCount = tasks.filter(task => !task.completed).length;
+      this.completedCount = tasks.filter(task => task.completed).length;
+    });
   }
 
 drop(event: CdkDragDrop<Task[]>) {

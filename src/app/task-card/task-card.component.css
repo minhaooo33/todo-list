@@ -42,12 +42,23 @@
     color:#4A90E2;
 }
 
-.checkbox{
-    margin-left: -16px;
-    transform-origin: right center;
-    transform: translateX(-4px);
-    scale: 1.6;
+.task-title{
+    box-sizing: border-box;
+    display: flex;
 }
+
+.task-left{
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.checkbox{
+    scale: 1.6;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
 
 .title{
     font-family: Roboto-Medium;
@@ -55,6 +66,9 @@
     background-color: transparent;
     border: none;
     outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .completed {
@@ -63,7 +77,7 @@
 }
 
 .task-info{
-    margin-top: 8px;
+    margin-left: 64px;
     margin-bottom: -8px;
 }
 
@@ -81,20 +95,16 @@
 
 
 .task-top,.task-bottom{
-    padding-left: 40px;
     background-color:#f2f2f2;
-    padding: 24px 32px;
+    padding: 24px 32px 24px 0px;
     box-shadow: 0 4px 4px 0 #C8C8C8;
     border-radius: 5px;
+    box-sizing: border-box;
 
 }
 .task-bottom{
     border-top: 2px solid #e1e1e1;
     padding-left: 72px;
-}
-
-.task-top{
-    padding-left: 65px;
 }
 
 .task-top.important{
@@ -140,6 +150,7 @@
     margin-top:-16px;
     display: flex;
     align-items: center;
+    gap: 16px;
 }
 
 .file-info p {
@@ -153,7 +164,7 @@
 }
 
 .upload-btn{
-    margin-left: 46px;
+    margin-left: 0px;
 }
 
 .upload-btn .file-input {
@@ -224,4 +235,16 @@
 }
 .add-btn:hover{
     background-color: #3982D7;;
+}
+
+.drag-handle {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: grab;
+  font-size: 40px;
+}
+
+.task-list:hover .drag-handle {
+opacity: 1;
+color:#D8D8D8;
 }

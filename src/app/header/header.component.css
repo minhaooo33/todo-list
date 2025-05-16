@@ -9,7 +9,7 @@ header {
   height: 76px; 
   display: flex;
   background-color:#4A90E2;
-  
+
 }
 
 .header-content {
@@ -17,8 +17,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 35px;
-  gap: 64px;
+  gap: 72px;
 }
 
 button{

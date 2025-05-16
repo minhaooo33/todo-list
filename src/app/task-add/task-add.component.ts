@@ -17,9 +17,9 @@ adding = false;
 faPlus = faPlus;
 isCompleted: boolean = false;
 priority: boolean = false;
+selectedFileName: string = '';
+selectedFileUploadTime: string = '';
 constructor(private todoSvc: TodoService) {}
-
-
 
 handleStartAdding() {
   this.adding = !this.adding;
@@ -32,7 +32,8 @@ handleAddNewTask(payload: {
     comment: string,
     deadlineDate: string,
     deadlineTime: string,
-
+    fileName?: string;
+    fileUploadTime?: string;
 }
 
 )  {
@@ -48,10 +49,21 @@ handleAddNewTask(payload: {
       deadlineTime: payload.deadlineTime,
       comment: payload.comment,
       order: maxOrder + 1,
+      fileName: payload.fileName,
+      fileUploadTime: payload.fileUploadTime,
     };
     this.todoSvc.addTask(newTask);
     this.adding = false;
      console.log('newTask', newTask);
   }
  
+  onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length) return;
+
+  const file = input.files[0];
+  this.selectedFileName = file.name;
+  this.selectedFileUploadTime = new Date().toLocaleString();
+}
+
 }

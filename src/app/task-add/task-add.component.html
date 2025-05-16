@@ -28,6 +28,9 @@
     [isAdding]="true"
     [isCompleted]="isCompleted"
     [priority]="priority"
+    (fileSelected)="onFileSelected($event)"
+    [fileName]="selectedFileName"
+    [fileUploadTime]="selectedFileUploadTime"
     >
   </app-task-card>
 
