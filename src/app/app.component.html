@@ -5,8 +5,9 @@
 cdkDropList 
 (cdkDropListDropped)="drop($event)"
 class="task-list">
+  <ng-container *ngIf="(todos$ | async) as tasks">
     <app-task-card
-      *ngFor="let task of todos$ | async; trackBy: trackById "
+      *ngFor="let task of (showAll ? tasks : tasks.slice(0, 8)); trackBy: trackById"
       [id]="task.id"
       [isCompleted]="task.completed"
       [priority]="task.priority"
@@ -19,6 +20,11 @@ class="task-list">
       cdkDrag
       class="task-card"
     ></app-task-card>
+
+    <button (click)="toggleShowAll()" class="toggle-btn">
+      {{ showAll ? '收合任務' : '顯示更多任務' }}
+    </button>
+  </ng-container>
 </ul>
 <p class="task-left">
   <ng-container *ngIf="inProgressCount > 0; else completed">

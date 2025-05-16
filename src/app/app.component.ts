@@ -46,4 +46,10 @@ trackById(index: number, task: Task): string {
   return task.id;
 }
 
+showAll = false;
+
+toggleShowAll() {
+  this.showAll = !this.showAll;
+}
+
 }
