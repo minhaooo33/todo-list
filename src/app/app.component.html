@@ -21,8 +21,11 @@ class="task-list">
       class="task-card"
     ></app-task-card>
 
-    <button (click)="toggleShowAll()" class="toggle-btn">
-      {{ showAll ? '收合任務' : '顯示更多任務' }}
+    <button 
+      *ngIf="tasks.length > 8" 
+      (click)="toggleShowAll()" 
+      class="toggle-btn">
+      {{ showAll ? 'Show Less' : 'Show More' }}
     </button>
   </ng-container>
 </ul>
