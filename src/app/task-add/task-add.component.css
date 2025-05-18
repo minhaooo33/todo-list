@@ -6,7 +6,6 @@
     margin-left: 0px;
     display: flex;
     background-color: #FFFFFF;
-   
 }
 
 
@@ -41,4 +40,11 @@ input::placeholder {
 .app-task-card{
     margin-bottom: -24px;
     margin-left: -36px;
+}
+
+@media (max-width: 768px) {
+    .add-task-item{
+        width: 100%;
+        margin-left: 0px;
+    }
 }
