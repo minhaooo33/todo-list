@@ -250,6 +250,9 @@ color:#D8D8D8;
 }
 
 @media (max-width: 600px) {
+    .task-item{
+        min-width: 424px;
+    }
     .task-item,.task-bottom, .task-top{
         max-width: 100%;
     }

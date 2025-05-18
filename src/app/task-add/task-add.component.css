@@ -42,9 +42,10 @@ input::placeholder {
     margin-left: -36px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .add-task-item{
         width: 100%;
         margin-left: 0px;
+        min-width: 424px;
     }
 }

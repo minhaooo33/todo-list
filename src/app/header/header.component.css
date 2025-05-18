@@ -5,7 +5,6 @@ header {
   left: 0; 
   right: 0;
   width: 100%;
-  border: 1px solid;
   height: 76px; 
   display: flex;
   background-color:#4A90E2;
@@ -52,7 +51,6 @@ header {
   left: 0; 
   right: 0;
   width: 100%;
-  border: 1px solid;
   height: 76px; 
   display: flex;
   background-color:#4A90E2;

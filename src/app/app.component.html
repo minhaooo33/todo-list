@@ -30,7 +30,7 @@ class="task-list">
     </button>
   </ng-container>
 </ul>
-<p class="task-left">
+<p class="task-left" *ngIf="!(inProgressCount === 0 && completedCount === 0)">
   <ng-container *ngIf="inProgressCount > 0; else completed">
     {{ inProgressCount }} task left
   </ng-container>
